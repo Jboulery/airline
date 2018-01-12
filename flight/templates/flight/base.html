@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Airline Website{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'flight/css/bootstrap.min.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'flight/css/style.css' %}" />
+    <script src="{% static 'flight/js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'flight/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'flight:index' %}">
+                Airline
+            </a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="">
+                    <a href="{% url 'flight:index' %}">
+                        <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>&nbsp;
+                        Flights
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;
+                        Employees
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;
+                        Bookings
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                        Add Flight
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+                        Logout
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+{% block body %}
+{% endblock %}
+</body>
+</html>

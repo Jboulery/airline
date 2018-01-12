@@ -1,0 +1,9 @@
+{% extends 'flight/base.html' %}
+{% block title %}Flight {{flight.flight_number}}{% endblock %}
+
+{% block body %}
+    {{ flight.flight_number }}<br>
+    {{ flight.plane }}<br>
+    {{ flight.departure }}<br>
+    {{ flight.arrival }}<br>
+{% endblock %}

@@ -1,4 +1,14 @@
-from django.http import HttpResponse
+from django.views import generic
+from .models import Flight
 
-def index(request):
-    return HttpResponse('<h1>Hello World !</h1>')
+class IndexView(generic.ListView):
+    template_name = 'flight/index.html'
+    context_object_name = 'all_flights'
+
+    def get_queryset(self):
+        return Flight.objects.all()
+
+
+class DetailView(generic.DetailView):
+    model = Flight
+    template_name = 'flight/detail.html'

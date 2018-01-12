@@ -1,0 +1,18 @@
+{% extends 'flight/base.html' %}
+
+{% block body %}
+    {% if all_flights %}
+
+        <ul>
+            {% for flight in all_flights %}
+            <li>
+                <a href="{% url 'flight:detail' flight.id %}">{{ flight.flight_number }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+
+        <h3>No Flight Registered</h3>
+
+    {% endif %}
+{% endblock %}

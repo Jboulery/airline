@@ -7,6 +7,9 @@ class Person(models.Model):
     dob = models.DateField()
     address = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.firstname + ' ' + self.lastname
+
 class Employee(Person):
     salary = models.PositiveIntegerField()
     job = models.CharField(max_length=100)
@@ -24,11 +27,17 @@ class Plane(models.Model):
     nb_rows_of_seats = models.PositiveSmallIntegerField()
     nb_col_of_seats = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return self.manufacturer + ' - ' + self.aircraft_model
+
 class Airport(models.Model):
     three_letters_code = models.CharField(max_length=3) #Regex Validator needed
     name = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name + ' (' + self.three_letters_code + ')'
 
 class Departure(models.Model):
     time = models.DateTimeField()
@@ -38,9 +47,15 @@ class Departure(models.Model):
     aircrew_1 = models.ForeignKey(AirCrew, related_name='aircrew_1')
     aircrew_2 = models.ForeignKey(AirCrew, related_name='aircrew_2')
 
+    def __str__(self):
+        return self.airport.name + ' - ' + str(self.time)
+
 class Arrival(models.Model):
     time = models.DateTimeField()
     airport = models.ForeignKey(Airport, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.airport.name + ' - ' + str(self.time)
 
 class Flight(models.Model):
     flight_number = models.CharField(max_length=10)
@@ -48,10 +63,16 @@ class Flight(models.Model):
     departure = models.ForeignKey(Departure, on_delete=models.CASCADE)
     arrival = models.ForeignKey(Arrival, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.flight_number
+
 class Booking(models.Model):
     booking_number = models.CharField(max_length=50)
     price = models.FloatField()
     flight = models.ForeignKey(Flight)
+
+    def __str__(self):
+        return self.booking_number
 
 class Customer(Person):
     booking = models.ForeignKey(Booking)
