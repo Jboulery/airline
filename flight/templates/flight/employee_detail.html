@@ -1,0 +1,65 @@
+{% extends 'flight/base.html' %}
+{% block title %}{{employee}}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid flights-container">
+
+        <!-- Left Flight Search -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>Picture</h4>
+                    <div>
+                        Here
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Details List -->
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Employee Details</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{error_message}}</strong></p>
+                    {% endif %}
+
+                    <h3>General</h3>
+                    <table class="table" id="generalDetailsTable">
+                        <tbody>
+                            <tr>
+                              <th>Name</th>
+                                <td>{{employee}}</td>
+                            </tr>
+                            <tr>
+                              <th>Birthday</th>
+                                <td>{{employee.dob}}</td>
+                            </tr>
+                            <tr>
+                              <th>Address</th>
+                                <td>{{employee.address}}</td>
+                            </tr>
+                            <tr>
+                                <th>Job</th>
+                                <td>{{employee.job}}</td>
+                            </tr>
+                            <tr>
+                                <th>Current Salary</th>
+                                <td>{{employee.salary}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'flight/base.html' %}
+{% block title %}Employees{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid flights-container">
+
+        <!-- Left Flight Search -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <form class="form-horizontal" role="search" method="get" action="#">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="employee_name" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-8 col-sm-4">
+                            <button type="submit" class="btn btn-default">Search</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Employees List -->
+        {% if all_employees %}
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'flight:employee-add' %}">Add New Employee</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Employees List</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{error_message}}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Birthday</th>
+                                <th>Job</th>
+                                <th>Current Monthly Salary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for employee in all_employees %}
+                            <tr>
+                                <td><a href="#">{{employee}}</a></td>
+                                <td>{{employee.address}}</td>
+                                <td></td>
+                                <td>{{employee.dob}}</td>
+                                <td>{{employee.job}}</td>
+                                <td>{{employee.salary}}€</td>
+                                <td>
+                                    <a class="btn btn-primary btn-sml" href="{% url 'flight:employee-update' employee.id %}">
+                                        <span class="glyphicon glyphicon-cog"></span>
+                                    </a>
+                                    <form action="{% url 'flight:employee-delete' employee.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="album_id" value="{{employee.id}}"/>
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% endif %}
+{% endblock %}

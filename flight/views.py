@@ -1,9 +1,10 @@
 from django.views import generic
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .models import Flight
+from .models import Flight, Employee
 
 
+#---------Flights---------
 class IndexView(generic.ListView):
     template_name = 'flight/index.html'
     context_object_name = 'all_flights'
@@ -30,3 +31,32 @@ class FlightUpdate(UpdateView):
 class FlightDelete(DeleteView):
     model = Flight
     success_url = reverse_lazy('flight:index')
+
+#---------Employees---------
+
+class EmployeesIndexView(generic.ListView):
+    template_name = 'flight/employees.html'
+    context_object_name = 'all_employees'
+
+    def get_queryset(self):
+        return Employee.objects.all()
+
+
+class EmployeeDetailView(generic.DetailView):
+    model = Employee
+    template_name = 'flight/employee_detail.html'
+
+
+class EmployeeCreate(CreateView):
+    model = Employee
+    fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary']
+
+
+class EmployeeUpdate(UpdateView):
+    model = Employee
+    fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary']
+
+
+class EmployeeDelete(DeleteView):
+    model = Employee
+    success_url = reverse_lazy('flight:employee-index')

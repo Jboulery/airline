@@ -15,6 +15,9 @@ class Employee(Person):
     salary = models.PositiveIntegerField()
     job = models.CharField(max_length=100)
 
+    def get_absolute_url(self):
+        return reverse('flight:employee-detail', kwargs={'pk': self.pk})
+
 class AirCrew(Employee):
     total_flying_hours = models.PositiveIntegerField()
 
