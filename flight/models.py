@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Person(models.Model):
@@ -28,7 +29,7 @@ class Plane(models.Model):
     nb_col_of_seats = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return self.manufacturer + ' - ' + self.aircraft_model
+        return self.manufacturer + ' ' + self.aircraft_model + ' - ' + self.registration_number
 
 class Airport(models.Model):
     three_letters_code = models.CharField(max_length=3) #Regex Validator needed
@@ -62,6 +63,9 @@ class Flight(models.Model):
     plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
     departure = models.ForeignKey(Departure, on_delete=models.CASCADE)
     arrival = models.ForeignKey(Arrival, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('flight:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.flight_number

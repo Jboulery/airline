@@ -2,8 +2,94 @@
 {% block title %}Flight {{flight.flight_number}}{% endblock %}
 
 {% block body %}
-    {{ flight.flight_number }}<br>
-    {{ flight.plane }}<br>
-    {{ flight.departure }}<br>
-    {{ flight.arrival }}<br>
+
+    <div class="container-fluid flights-container">
+
+        <!-- Left Flight Search -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>Status</h4>
+                    <div>
+                        On-Time
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Details List -->
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Details for Flight {{flight.flight_number}}</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{error_message}}</strong></p>
+                    {% endif %}
+
+                    <h3>General</h3>
+                    <table class="table" id="generalDetailsTable">
+                        <tbody>
+                            <tr>
+                              <th>Aircraft</th>
+                                <td>{{flight.plane}}</td>
+                            </tr>
+                            <tr>
+                              <th>Departure Airport</th>
+                                <td>{{flight.departure.airport}}</td>
+                            </tr>
+                            <tr>
+                              <th>Departure Time</th>
+                                <td>{{flight.departure.time}}</td>
+                            </tr>
+                            <tr>
+                                <th>Arrival Airport</th>
+                                <td>{{flight.arrival.airport}}</td>
+                            </tr>
+                            <tr>
+                                <th>Expected Arrival Time</th>
+                                <td>{{flight.arrival.time}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Air Crew</h3>
+
+                    <table class="table" id="crewDetailsTable">
+                        <tbody>
+                            <tr>
+                              <th>Captain</th>
+                                <td>{{flight.departure.pilot_1}}</td>
+                            </tr>
+                            <tr>
+                              <th>Copilot</th>
+                                <td>{{flight.departure.pilot_2}}</td>
+                            </tr>
+                            <tr>
+                              <th>Air Crew 1</th>
+                                <td>{{flight.departure.aircrew_1}}</td>
+                            </tr>
+                            <tr>
+                                <th>Air Crew 2</th>
+                                <td>{{flight.departure.aircrew_2}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Passengers</h3>
+
+                    <table class="table" id="passengersDetailsTable">
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 {% endblock %}
