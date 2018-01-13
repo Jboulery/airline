@@ -49,12 +49,12 @@ class EmployeeDetailView(generic.DetailView):
 
 class EmployeeCreate(CreateView):
     model = Employee
-    fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary']
+    fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary', 'picture']
 
 
 class EmployeeUpdate(UpdateView):
     model = Employee
-    fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary']
+    fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary', 'picture']
 
 
 class EmployeeDelete(DeleteView):

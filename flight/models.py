@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 
+
 class Person(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
@@ -14,6 +15,7 @@ class Person(models.Model):
 class Employee(Person):
     salary = models.PositiveIntegerField()
     job = models.CharField(max_length=100)
+    picture = models.FileField(default='anonymous.png')
 
     def get_absolute_url(self):
         return reverse('flight:employee-detail', kwargs={'pk': self.pk})
