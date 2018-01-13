@@ -33,24 +33,24 @@
                     <table class="table" id="generalDetailsTable">
                         <tbody>
                             <tr>
-                              <th>Aircraft</th>
-                                <td>{{flight.plane}}</td>
+                                <th class="col-sm-3">Aircraft</th>
+                                <td class="col-sm-9">{{flight.plane}}</td>
                             </tr>
                             <tr>
-                              <th>Departure Airport</th>
-                                <td>{{flight.departure.airport}}</td>
+                                <th class="col-sm-3">Departure Airport</th>
+                                <td class="col-sm-9">{{flight.departure.airport}}</td>
                             </tr>
                             <tr>
-                              <th>Departure Time</th>
-                                <td>{{flight.departure.time}}</td>
+                                <th class="col-sm-3">Departure Time</th>
+                                <td class="col-sm-9">{{flight.departure.time}}</td>
                             </tr>
                             <tr>
-                                <th>Arrival Airport</th>
-                                <td>{{flight.arrival.airport}}</td>
+                                <th class="col-sm-3">Arrival Airport</th>
+                                <td class="col-sm-9">{{flight.arrival.airport}}</td>
                             </tr>
                             <tr>
-                                <th>Expected Arrival Time</th>
-                                <td>{{flight.arrival.time}}</td>
+                                <th class="col-sm-3">Expected Arrival Time</th>
+                                <td class="col-sm-9">{{flight.arrival.time}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -60,20 +60,20 @@
                     <table class="table" id="crewDetailsTable">
                         <tbody>
                             <tr>
-                              <th>Captain</th>
-                                <td>{{flight.departure.pilot_1}}</td>
+                                <th class="col-sm-3">Captain</th>
+                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.pilot_1.id %}">{{flight.departure.pilot_1}}</a></td>
                             </tr>
                             <tr>
-                              <th>Copilot</th>
-                                <td>{{flight.departure.pilot_2}}</td>
+                                <th class="col-sm-3">Copilot</th>
+                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.pilot_2.id %}">{{flight.departure.pilot_2}}</a></td>
                             </tr>
                             <tr>
-                              <th>Air Crew 1</th>
-                                <td>{{flight.departure.aircrew_1}}</td>
+                                <th class="col-sm-3">Air Crew 1</th>
+                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.aircrew_1.id %}">{{flight.departure.aircrew_1}}</a></td>
                             </tr>
                             <tr>
-                                <th>Air Crew 2</th>
-                                <td>{{flight.departure.aircrew_2}}</td>
+                                <th class="col-sm-3">Air Crew 2</th>
+                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.aircrew_2.id %}">{{flight.departure.aircrew_2}}</a</td>
                             </tr>
                         </tbody>
                     </table>

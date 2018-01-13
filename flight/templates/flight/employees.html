@@ -32,7 +32,7 @@
         <div class="col-sm-8 col-md-9">
 
             <ul class="nav nav-pills" style="margin-bottom: 10px;">
-                <li role="presentation" class="active"><a href="{% url 'flight:employee-add' %}">Add New Employee</a></li>
+                <li role="presentation" class="col-sm-offset-10 col-sm-2 active"><a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Employee</a></li>
             </ul>
 
             <div class="panel panel-default">
@@ -59,7 +59,7 @@
                         <tbody>
                         {% for employee in all_employees %}
                             <tr>
-                                <td><a href="#">{{employee}}</a></td>
+                                <td><a href="{% url 'flight:employee-detail' employee.id %}">{{employee}}</a></td>
                                 <td>{{employee.address}}</td>
                                 <td></td>
                                 <td>{{employee.dob}}</td>

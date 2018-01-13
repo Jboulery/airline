@@ -33,27 +33,45 @@
                     <table class="table" id="generalDetailsTable">
                         <tbody>
                             <tr>
-                              <th>Name</th>
-                                <td>{{employee}}</td>
+                                <th class="col-sm-3">Name</th>
+                                <td class="col-sm-9">{{employee}}</td>
                             </tr>
                             <tr>
-                              <th>Birthday</th>
-                                <td>{{employee.dob}}</td>
+                                <th class="col-sm-3">Birthday</th>
+                                <td class="col-sm-9">{{employee.dob}}</td>
                             </tr>
                             <tr>
-                              <th>Address</th>
-                                <td>{{employee.address}}</td>
+                                <th class="col-sm-3">Address</th>
+                                <td class="col-sm-9">{{employee.address}}</td>
                             </tr>
                             <tr>
-                                <th>Job</th>
-                                <td>{{employee.job}}</td>
+                                <th class="col-sm-3">Job</th>
+                                <td class="col-sm-9">{{employee.job}}</td>
                             </tr>
                             <tr>
-                                <th>Current Salary</th>
-                                <td>{{employee.salary}}</td>
+                                <th class="col-sm-3">Current Salary</th>
+                                <td class="col-sm-9">{{employee.salary}}</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    {% if employee.aircrew %}
+                        <h3>Flying Information</h3>
+                        <table class="table" id="generalDetailsTable">
+                            <tbody>
+                                <tr>
+                                    <th class="col-sm-3">Total Flying Hours</th>
+                                    <td class="col-sm-9">{{employee.aircrew.total_flying_hours}}</td>
+                                </tr>
+                                {% if employee.aircrew.pilot %}
+                                    <tr>
+                                        <th class="col-sm-3">Licence Number</th>
+                                        <td class="col-sm-9">{{employee.aircrew.pilot.license_number}}</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    {% endif %}
 
                 </div>
             </div>
