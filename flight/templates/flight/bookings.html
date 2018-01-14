@@ -1,0 +1,77 @@
+{% extends 'flight/base.html' %}
+{% block title %}Bookings{% endblock %}
+{% block bookings_active %}active{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid flights-container">
+
+        <!-- Left Flight Search -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <form class="form-horizontal" role="search" method="get" action="#">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Booking Number</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="booking_number" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-8 col-sm-4">
+                            <button type="submit" class="btn btn-default">Search</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Employees List -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="col-sm-offset-10 col-sm-2 active">
+                    <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span>&nbsp;New Booking</a>
+                </li>
+            </ul>
+
+            {% if all_bookings %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Bookings List</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{error_message}}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Booking Number</th>
+                                <th>Price</th>
+                                <th>Flight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for bookings in all_bookings %}
+                            <tr>
+                                <td><a href="{% url 'flight:employee-detail' employee.id %}">{{employee}}</a></td>
+                                <td>{{booking.booking_number}}</td>
+                                <td>{{booking.price}}</td>
+                                <td>{{booking.flight}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+{% endblock %}

@@ -45,4 +45,8 @@ urlpatterns = [
 
     #/logout/
     url(r'^logout/$', views.logout_user, name='logout'),
+
+    # -------Bookings-------
+    #/bookings/
+    url(r'^bookings/$', views.BookingsView.as_view(), name='bookings')
 ]

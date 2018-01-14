@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.generic import View
-from .models import Flight, Employee
+from .models import Flight, Employee, Booking
 from .forms import UserForm
 
 
@@ -134,3 +134,12 @@ def logout_user(request):
         "form": form,
     }
     return render(request, 'flight/login.html', context)
+
+#---------Bookings---------
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class BookingsView(generic.ListView):
+    template_name = 'flight/bookings.html'
+    context_object_name = 'all_bookings'
+
+    def get_queryset(self):
+        return Booking.objects.all()

@@ -2,7 +2,6 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 
-
 class Person(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
@@ -12,6 +11,7 @@ class Person(models.Model):
     def __str__(self):
         return self.firstname + ' ' + self.lastname
 
+
 class Employee(Person):
     salary = models.PositiveIntegerField()
     job = models.CharField(max_length=100)
@@ -20,11 +20,14 @@ class Employee(Person):
     def get_absolute_url(self):
         return reverse('flight:employee-detail', kwargs={'pk': self.pk})
 
+
 class AirCrew(Employee):
     total_flying_hours = models.PositiveIntegerField()
 
+
 class Pilot(AirCrew):
     license_number = models.CharField(max_length=100)
+
 
 class Plane(models.Model):
     registration_number = models.CharField(max_length=20)
@@ -37,13 +40,15 @@ class Plane(models.Model):
         return self.manufacturer + ' ' + self.aircraft_model + ' - ' + self.registration_number
 
 class Airport(models.Model):
-    three_letters_code = models.CharField(max_length=3) #Regex Validator needed
+    # Regex Validator needed
+    three_letters_code = models.CharField(max_length=3)
     name = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name + ' (' + self.three_letters_code + ')'
+
 
 class Departure(models.Model):
     time = models.DateTimeField()
@@ -56,12 +61,14 @@ class Departure(models.Model):
     def __str__(self):
         return self.airport.name + ' - ' + str(self.time)
 
+
 class Arrival(models.Model):
     time = models.DateTimeField()
     airport = models.ForeignKey(Airport, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.airport.name + ' - ' + str(self.time)
+
 
 class Flight(models.Model):
     flight_number = models.CharField(max_length=10)
@@ -75,6 +82,7 @@ class Flight(models.Model):
     def __str__(self):
         return self.flight_number
 
+
 class Booking(models.Model):
     booking_number = models.CharField(max_length=50)
     price = models.FloatField()
@@ -82,6 +90,7 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.booking_number
+
 
 class Customer(Person):
     booking = models.ForeignKey(Booking)
