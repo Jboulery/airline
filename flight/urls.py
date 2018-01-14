@@ -35,4 +35,14 @@ urlpatterns = [
 
     #/flight/<flight_id>/delete/
     url(r'^employee/(?P<pk>[0-9]+)/delete/$', views.EmployeeDelete.as_view(), name='employee-delete'),
+
+    #-------Users-------
+    #/register/
+    url(r'^register/$', views.UserFormView.as_view(), name='register'),
+
+    #/login/
+    url(r'^login/$', views.login_user, name='login'),
+
+    #/logout/
+    url(r'^logout/$', views.logout_user, name='logout'),
 ]
