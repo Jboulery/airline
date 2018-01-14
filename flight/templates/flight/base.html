@@ -28,24 +28,26 @@
         <!-- Items -->
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
-                <li class="">
+                <li class="{% block index_active %}{% endblock %}">
                     <a href="{% url 'flight:index' %}">
                         <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>&nbsp;
                         Flights
                     </a>
                 </li>
-                <li class="">
-                    <a href="{% url 'flight:employee-index' %}">
-                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;
-                        Employees
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;
-                        Bookings
-                    </a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="{% block employee_index_active %}{% endblock %}">
+                        <a href="{% url 'flight:employee-index' %}">
+                            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;
+                            Employees
+                        </a>
+                    </li>
+                    <li class="{% block bookings_active %}{% endblock %}">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;
+                            Bookings
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

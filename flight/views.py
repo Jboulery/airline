@@ -18,28 +18,33 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Flight.objects.all()
 
-@method_decorator(login_required, name='dispatch')
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class DetailView(generic.DetailView):
     model = Flight
     template_name = 'flight/detail.html'
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class FlightCreate(CreateView):
     model = Flight
     fields = ['flight_number', 'plane', 'departure', 'arrival']
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class FlightUpdate(UpdateView):
     model = Flight
     fields = ['flight_number', 'plane', 'departure', 'arrival']
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class FlightDelete(DeleteView):
     model = Flight
     success_url = reverse_lazy('flight:index')
 
+
 #---------Employees---------
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class EmployeesIndexView(generic.ListView):
     template_name = 'flight/employees.html'
     context_object_name = 'all_employees'
@@ -48,21 +53,25 @@ class EmployeesIndexView(generic.ListView):
         return Employee.objects.all()
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class EmployeeDetailView(generic.DetailView):
     model = Employee
     template_name = 'flight/employee_detail.html'
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class EmployeeCreate(CreateView):
     model = Employee
     fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary', 'picture']
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class EmployeeUpdate(UpdateView):
     model = Employee
     fields = ['firstname', 'lastname', 'dob', 'address', 'job', 'salary', 'picture']
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class EmployeeDelete(DeleteView):
     model = Employee
     success_url = reverse_lazy('flight:employee-index')
