@@ -1,0 +1,90 @@
+{% extends 'flight/base.html' %}
+{% block title %}Booking Confirmed{% endblock %}
+{% block bookings_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body" style="text-align: center;">
+                <h3>Booking Confirmed</h3>
+                <div class="text-danger">
+                    Please remember your booking number to access your booking !
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left General Details -->
+
+    <div class="row">
+        <div class="col-sm-6 col-md-offset-2 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {% if error_message %}
+                        <p class="text-danger"><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Flight</th>
+                                <th>Departure Airport</th>
+                                <th>Arrival Airport</th>
+                                <th>Departure Time</th>
+                                <th>Arrival Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{flight}}</td>
+                            <td>{{flight.departure.airport}}</td>
+                            <td>{{flight.arrival.airport}}</td>
+                            <td>{{flight.departure.time}}</td>
+                            <td>{{flight.arrival.time}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Booking Details -->
+
+        <div class="col-sm-6 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {% if error_message %}
+                        <p class="text-danger"><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Booking Number</th>
+                                <th>Passenger Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for booking in confirmed_bookings_list %}
+                            <tr>
+                                <td>{{booking.booking_number}}</td>
+                                <td>{{booking.customer_set.first.firstname}} {{booking.customer_set.first.lastname}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

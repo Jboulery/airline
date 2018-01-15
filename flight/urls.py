@@ -53,6 +53,9 @@ urlpatterns = [
     #/bookings/confirmation/
     url(r'^bookings/confirmation/$', views.booking_confirmation, name='bookings-confirmation'),
 
+    #/bookings/confirmed/
+    url(r'^bookings/confirmed/$', views.booking_submitted, name='bookings-confirmed'),
+
     #-------Other-------
     #/other/
     url(r'^other/$', views.other_index, name='other-index')

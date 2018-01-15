@@ -88,9 +88,11 @@ class Flight(models.Model):
 
 
 class Booking(models.Model):
+    from datetime import datetime
     booking_number = models.CharField(max_length=50)
     price = models.FloatField(default=100)
     flight = models.ForeignKey(Flight)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.booking_number

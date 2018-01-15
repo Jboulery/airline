@@ -4,9 +4,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.utils.crypto import get_random_string
 from django.views import generic
 from django.views.generic import View
-from .models import Flight, Employee, Booking, Airport, Plane
+from .models import Flight, Employee, Booking, Customer
 from .forms import UserForm
 
 
@@ -159,6 +160,34 @@ def booking_confirmation(request):
 
         return render(request, 'flight/booking-confirmation.html', context)
 
+def booking_submitted(request):
+    if request.method == 'POST':
+        nb_of_passengers = int(request.POST['nb_of_passengers'])
+        print(nb_of_passengers)
+        flight = Flight.objects.get(id = int(request.POST['flight_id']))
+
+        confirmed_bookings_list = []
+
+        for i in range(1, nb_of_passengers + 1):
+            try:
+                b = Booking(booking_number=get_random_string(length=8).upper(), flight=flight)
+                b.save()
+                lastname = request.POST['lastname_passenger_' + str(i)]
+                firstname = request.POST['firstname_passenger_' + str(i)]
+                dob = request.POST['birthday_passenger_' + str(i)]
+                address = request.POST['address_passenger_' + str(i)]
+                c = Customer(firstname=firstname, lastname=lastname, dob=dob, address=address, booking=b)
+                c.save()
+                confirmed_bookings_list.append(b)
+            except:
+                continue
+
+        context = {
+            'flight': flight,
+            'confirmed_bookings_list': confirmed_bookings_list,
+        }
+
+        return render(request, 'flight/booking-confirmed.html', context)
 
 def other_index(request):
     all_flights_list = Flight.objects.all()

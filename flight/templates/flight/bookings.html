@@ -31,12 +31,6 @@
         <!-- Right Employees List -->
         <div class="col-sm-8 col-md-9">
 
-            <ul class="nav nav-pills" style="margin-bottom: 10px;">
-                <li role="presentation" class="col-sm-offset-10 col-sm-2 active">
-                    <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span>&nbsp;New Booking</a>
-                </li>
-            </ul>
-
             {% if all_bookings %}
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -51,15 +45,18 @@
                         <thead>
                             <tr>
                                 <th>Booking Number</th>
+                                <th>Passenger</th>
+                                <th>Registration Time</th>
                                 <th>Price</th>
                                 <th>Flight</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for bookings in all_bookings %}
+                        {% for booking in all_bookings %}
                             <tr>
-                                <td><a href="{% url 'flight:employee-detail' employee.id %}">{{employee}}</a></td>
                                 <td>{{booking.booking_number}}</td>
+                                <td>{{booking.customer_set.first.firstname}} {{booking.customer_set.first.lastname}}</td>
+                                <td>{{booking.created_at}}</td>
                                 <td>{{booking.price}}</td>
                                 <td>{{booking.flight}}</td>
                             </tr>

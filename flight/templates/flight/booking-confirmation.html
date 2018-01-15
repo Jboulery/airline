@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-sm-12 col-md-offset-3 col-md-6">
+        <div class="col-sm-12 col-md-offset-4 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>Booking Confirmation</h3>
@@ -15,8 +15,10 @@
                         <p class="text-danger"><strong>{{ error_message }}</strong></p>
                     {% endif %}
 
-                    <form class="form-horizontal" role="form" action="#" method="post">
+                    <form class="form-horizontal" role="form" action="{% url 'flight:bookings-confirmed' %}" method="post">
+                        {% csrf_token %}
                         <input class="hidden" name="nb_of_passengers" value="{{nb_of_passengers}}"/>
+                        <input class="hidden" name="flight_id" value="{{flight.id}}"/>
                         {% for i in range_nb_of_passengers %}
                             <h3>Passenger {{ i }}</h3>
                             <div class="form-group">
@@ -33,12 +35,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Address</label>
-                                <input class="form-control col-sm-10" type="text" name="address_passenger{{i}}" value=""/>
+                                <input class="form-control col-sm-10" type="text" name="address_passenger_{{i}}" value=""/>
                             </div>
                         {% endfor %}
                         <button type="submit" class="btn btn-success">Book Your Travel !</button>
                     </form>
-                    {{flight.plane}}
 
                 </div>
             </div>
