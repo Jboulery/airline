@@ -48,5 +48,8 @@ urlpatterns = [
 
     # -------Bookings-------
     #/bookings/
-    url(r'^bookings/$', views.BookingsView.as_view(), name='bookings')
+    url(r'^bookings/$', views.BookingsView.as_view(), name='bookings'),
+
+    #/bookings/confirmation/
+    url(r'^bookings/confirmation', views.booking_confirmation, name='bookings-confirmation'),
 ]

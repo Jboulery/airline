@@ -1,5 +1,6 @@
 {% extends 'flight/base.html' %}
 {% block title %}Flight {{flight.flight_number}}{% endblock %}
+{% block index_active %}active{% endblock %}
 
 {% block body %}
 
@@ -17,12 +18,29 @@
                     <div>
                         {{ flight.total_seats_nb }}
                     </div>
-                    <br>
-                    <div>
-                        <a href="#" class="btn btn-success col-sm-12">
-                            Book a seat
-                        </a>
-                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form role="form" action="{% url 'flight:bookings-confirmation' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="control-label" for="id_nb_of_passengers">
+                                Number of passengers
+                            </label>
+                            <select class="form-control" id="id_nb_of_passengers" name="nb_of_passengers">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                        </div>
+                        <input class="hidden" name="flight" value="{{flight.id}}"/>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success col-sm-12">Book Seats</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

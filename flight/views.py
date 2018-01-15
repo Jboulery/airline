@@ -77,6 +77,7 @@ class EmployeeDelete(DeleteView):
 
 
 #---------Users---------
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class UserFormView(View):
     form_class = UserForm
     template_name = 'flight/registration_form.html'
@@ -118,7 +119,8 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'flight/index.html')
+                all_flights = Flight.objects.all()
+                return render(request, 'flight/index.html', {'all_flights': all_flights})
             else:
                 return render(request, 'flight/login.html', {'error_message': 'Your account has been disabled'})
         else:
@@ -134,6 +136,7 @@ def logout_user(request):
     }
     return render(request, 'flight/login.html', context)
 
+
 #---------Bookings---------
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class BookingsView(generic.ListView):
@@ -142,3 +145,15 @@ class BookingsView(generic.ListView):
 
     def get_queryset(self):
         return Booking.objects.all()
+
+def booking_confirmation(request):
+    if request.method == 'POST':
+        nb_of_passengers = int(request.POST['nb_of_passengers'])
+        flight_id = request.POST['flight']
+        context = {
+            'nb_of_passengers': nb_of_passengers,
+            'range_nb_of_passengers': range(1, nb_of_passengers + 1),
+            'flight': Flight.objects.get(id=int(flight_id)),
+        }
+
+        return render(request, 'flight/booking-confirmation.html', context)
