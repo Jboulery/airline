@@ -73,8 +73,8 @@
                         </thead>
                         <tbody>
                         {% for flight in all_flights %}
-                            <tr>
-                                <td><a href="{% url 'flight:detail' flight.id %}">{{flight.flight_number}}</a></td>
+                            <tr class="flight-index-row" onclick="window.location.href='{% url 'flight:detail' flight.id %}'">
+                                <td>{{flight.flight_number}}</td>
                                 <td>{{flight.departure.airport}}</td>
                                 <td>{{flight.departure.time}}</td>
                                 <td>{{flight.arrival.airport}}</td>

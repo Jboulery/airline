@@ -39,6 +39,7 @@ class Plane(models.Model):
     def __str__(self):
         return self.manufacturer + ' ' + self.aircraft_model + ' - ' + self.registration_number
 
+
 class Airport(models.Model):
     # Regex Validator needed
     three_letters_code = models.CharField(max_length=3)
@@ -76,6 +77,9 @@ class Flight(models.Model):
     departure = models.ForeignKey(Departure, on_delete=models.CASCADE)
     arrival = models.ForeignKey(Arrival, on_delete=models.CASCADE)
 
+    def total_seats_nb(self):
+        return self.plane.nb_col_of_seats * self.plane.nb_rows_of_seats - self.booking_set.count()
+
     def get_absolute_url(self):
         return reverse('flight:detail', kwargs={'pk': self.pk})
 
@@ -85,7 +89,7 @@ class Flight(models.Model):
 
 class Booking(models.Model):
     booking_number = models.CharField(max_length=50)
-    price = models.FloatField()
+    price = models.FloatField(default=100)
     flight = models.ForeignKey(Flight)
 
     def __str__(self):

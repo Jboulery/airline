@@ -9,3 +9,11 @@ body{
 .navbar-brand{
     font-family: 'Satisfy';
 }
+
+.flight-index-row{
+    cursor: pointer;
+}
+
+.flight-index-row:hover{
+    background-color: #eeeeee;
+}

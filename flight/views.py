@@ -19,7 +19,6 @@ class IndexView(generic.ListView):
         return Flight.objects.all()
 
 
-@method_decorator(login_required(login_url='/login'), name='dispatch')
 class DetailView(generic.DetailView):
     model = Flight
     template_name = 'flight/detail.html'

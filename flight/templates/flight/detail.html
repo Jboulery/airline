@@ -13,6 +13,16 @@
                     <div>
                         On-Time
                     </div>
+                    <h4>Number of Avalaible Seats</h4>
+                    <div>
+                        {{ flight.total_seats_nb }}
+                    </div>
+                    <br>
+                    <div>
+                        <a href="#" class="btn btn-success col-sm-12">
+                            Book a seat
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,7 +34,6 @@
                 <div class="panel-body">
 
                     <h3>Details for Flight {{flight.flight_number}}</h3>
-
                     {% if error_message %}
                         <p><strong>{{error_message}}</strong></p>
                     {% endif %}
@@ -55,36 +64,37 @@
                         </tbody>
                     </table>
 
-                    <h3>Air Crew</h3>
+                    {% if user.is_authenticated %}
+                        <h3>Air Crew</h3>
 
-                    <table class="table" id="crewDetailsTable">
-                        <tbody>
-                            <tr>
-                                <th class="col-sm-3">Captain</th>
-                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.pilot_1.id %}">{{flight.departure.pilot_1}}</a></td>
-                            </tr>
-                            <tr>
-                                <th class="col-sm-3">Copilot</th>
-                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.pilot_2.id %}">{{flight.departure.pilot_2}}</a></td>
-                            </tr>
-                            <tr>
-                                <th class="col-sm-3">Air Crew 1</th>
-                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.aircrew_1.id %}">{{flight.departure.aircrew_1}}</a></td>
-                            </tr>
-                            <tr>
-                                <th class="col-sm-3">Air Crew 2</th>
-                                <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.aircrew_2.id %}">{{flight.departure.aircrew_2}}</a</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table" id="crewDetailsTable">
+                            <tbody>
+                                <tr>
+                                    <th class="col-sm-3">Captain</th>
+                                    <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.pilot_1.id %}">{{flight.departure.pilot_1}}</a></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-sm-3">Copilot</th>
+                                    <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.pilot_2.id %}">{{flight.departure.pilot_2}}</a></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-sm-3">Air Crew 1</th>
+                                    <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.aircrew_1.id %}">{{flight.departure.aircrew_1}}</a></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-sm-3">Air Crew 2</th>
+                                    <td class="col-sm-9"><a href="{% url 'flight:employee-detail' flight.departure.aircrew_2.id %}">{{flight.departure.aircrew_2}}</a</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <h3>Passengers</h3>
+                        <h3>Passengers</h3>
 
-                    <table class="table" id="passengersDetailsTable">
-                        <tbody>
-                        </tbody>
-                    </table>
-
+                        <table class="table" id="passengersDetailsTable">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    {% endif %}
                 </div>
             </div>
 
