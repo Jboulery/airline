@@ -47,6 +47,12 @@
                             Bookings
                         </a>
                     </li>
+                    <li class="{% block other_active %}{% endblock %}">
+                        <a href="{% url 'flight:other-index' %}">
+                            <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>&nbsp;
+                            Other
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
 

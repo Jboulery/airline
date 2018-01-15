@@ -51,5 +51,9 @@ urlpatterns = [
     url(r'^bookings/$', views.BookingsView.as_view(), name='bookings'),
 
     #/bookings/confirmation/
-    url(r'^bookings/confirmation', views.booking_confirmation, name='bookings-confirmation'),
+    url(r'^bookings/confirmation/$', views.booking_confirmation, name='bookings-confirmation'),
+
+    #-------Other-------
+    #/other/
+    url(r'^other/$', views.other_index, name='other-index')
 ]

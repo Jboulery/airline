@@ -1,0 +1,20 @@
+{% extends 'flight/base.html' %}
+{% block title %}General Management{% endblock %}
+{% block other_active %}active{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Test</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for flight in all_flights %}
+            <tr>
+                <td>{{flight.flight_number}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

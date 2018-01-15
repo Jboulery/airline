@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.generic import View
-from .models import Flight, Employee, Booking
+from .models import Flight, Employee, Booking, Airport, Plane
 from .forms import UserForm
 
 
@@ -146,6 +146,7 @@ class BookingsView(generic.ListView):
     def get_queryset(self):
         return Booking.objects.all()
 
+
 def booking_confirmation(request):
     if request.method == 'POST':
         nb_of_passengers = int(request.POST['nb_of_passengers'])
@@ -157,3 +158,13 @@ def booking_confirmation(request):
         }
 
         return render(request, 'flight/booking-confirmation.html', context)
+
+
+def other_index(request):
+    all_flights_list = Flight.objects.all()
+
+    context = {
+        'all_flights': all_flights_list,
+    }
+
+    return render(request, 'flight/other.html', context)
