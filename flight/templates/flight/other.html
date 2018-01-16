@@ -3,18 +3,170 @@
 {% block other_active %}active{% endblock %}
 
 {% block body %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Test</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for flight in all_flights %}
-            <tr>
-                <td>{{flight.flight_number}}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+    <!-- Left Plane List -->
+    <div class="col-sm-6 col-md-6">
+
+        {% if all_planes %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Planes List</h3>
+
+                {% if error_message %}
+                    <p><strong>{{error_message}}</strong></p>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Plaque d'immatriculation</th>
+                            <th>Fabricant</th>
+                            <th>Modèle</th>
+                            <th>Capacité col</th>
+                            <th>Capacité ligne</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for plane in all_planes %}
+                        <tr>
+                            <td>{{Plane.registration_number}}</td>
+                            <td>{{Plane.manufacturer}}</td>
+                            <td>{{Plane.aircraft_model}}</td>
+                            <td>{{Plane.nb_rows_of_seats}}</td>
+                            <td>{{Plane.nb_col_of_seats}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        {% endif %}
+        <ul class="nav nav-pills" style="margin-bottom: 10px;">
+            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Plane</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Right Airport List -->
+    <div class="col-sm-6 col-md-6">
+        {% if all_airports %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Airports List</h3>
+
+                {% if error_message %}
+                    <p><strong>{{error_message}}</strong></p>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code 3 lettres</th>
+                            <th>Nom</th>
+                            <th>Ville</th>
+                            <th>Pays</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for airport in all_airports %}
+                        <tr>
+                            <td>{{Airport.three_letters_code}}</td>
+                            <td>{{Airport.name}}</td>
+                            <td>{{Airport.city}}</td>
+                            <td>{{Airport.country}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+        <ul class="nav nav-pills" style="margin-bottom: 10px;">
+            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Airport</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Left Departures List -->
+    <div class="col-sm-6 col-md-6">
+    {% if all_departures %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Departures List</h3>
+
+                {% if error_message %}
+                    <p><strong>{{error_message}}</strong></p>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Heure</th>
+                            <th>Aéroport</th>
+                            <th>Pilote 1</th>
+                            <th>Pilote 2</th>
+                            <th>Staff 1</th>
+                            <th>Staff 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for departure in all_departures %}
+                        <tr>
+                            <td>{{Departure.time}}</td>
+                            <td>{{Departure.airport}}</td>
+                            <td>{{Departure.pilot_1}}</td>
+                            <td>{{Departure.pilot_2}}</td>
+                            <td>{{Departure.aircrew_1}}</td>
+                            <td>{{Departure.aircrew_2}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        {% endif %}
+        <ul class="nav nav-pills" style="margin-bottom: 10px;">
+            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Departure</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Right Arrivals List -->
+    <div class="col-sm-6 col-md-6">
+        {% if all_arrivals %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Arrivals List</h3>
+
+                {% if error_message %}
+                    <p><strong>{{error_message}}</strong></p>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Heure</th>
+                            <th>Aéroport</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for arrival in all_arrivals %}
+                        <tr>
+                            <td>{{Arrival.time}}</td>
+                            <td>{{Arrival.airport}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+        <ul class="nav nav-pills" style="margin-bottom: 10px;">
+            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Arrival</a>
+            </li>
+        </ul>
+    </div>
+
 {% endblock %}

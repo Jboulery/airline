@@ -4,10 +4,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.utils.crypto import get_random_string
 from django.views import generic
 from django.views.generic import View
-from .models import Flight, Employee, Booking, Customer
+from .models import Flight, Employee, Booking, Airport, Plane, Departure, Arrival, Customer
 from .forms import UserForm
 
 
@@ -160,6 +159,7 @@ def booking_confirmation(request):
 
         return render(request, 'flight/booking-confirmation.html', context)
 
+#----Other--------
 def booking_submitted(request):
     if request.method == 'POST':
         nb_of_passengers = int(request.POST['nb_of_passengers'])
@@ -188,12 +188,111 @@ def booking_submitted(request):
         }
 
         return render(request, 'flight/booking-confirmed.html', context)
+#----Other--------
 
 def other_index(request):
-    all_flights_list = Flight.objects.all()
-
+    all_airports_list = Airport.objects.all()
+    all_planes_list = Plane.objects.all()
+    all_departures_list = Departure.objects.all()
+    all_arrivals_list = Arrival.objects.all()
     context = {
-        'all_flights': all_flights_list,
+        'all_airports': all_airports_list,
+        'all_planes': all_planes_list,
+        'all_departures': all_departures_list,
+        'all_arrivals': all_arrivals_list,
     }
-
     return render(request, 'flight/other.html', context)
+
+#---------Plane---------
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class PlaneDetailView(generic.DetailView):
+    model = Plane
+    template_name = 'flight/plane_detail.html'
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class PlaneCreate(CreateView):
+    model = Plane
+    fields = ['registration_number', 'manufacturer', 'aircraft_model', 'nb_rows_of_seats', 'nb_col_of_seats']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class PlaneUpdate(UpdateView):
+    model = Plane
+    fields = ['registration_number', 'manufacturer', 'aircraft_model', 'nb_rows_of_seats', 'nb_col_of_seats']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class PlaneDelete(DeleteView):
+    model = Plane
+    success_url = reverse_lazy('flight:plane-index')
+
+#---------Airport---------
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class AirportCreate(CreateView):
+    model = Airport
+    fields = [' three_letters_code', 'name', 'city', 'country']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class AirportUpdate(UpdateView):
+    model = Airport
+    fields = [' three_letters_code', 'name', 'city', 'country']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class AirportDelete(DeleteView):
+    model = Airport
+    success_url = reverse_lazy('flight:airport-index')
+
+#---------Departure---------
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class DepartureDetailView(generic.DetailView):
+    model = Departure
+    template_name = 'flight/departure_detail.html'
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class DepartureCreate(CreateView):
+    model = Departure
+    fields = ['time', 'airport', 'pilot_1', 'pilot_2', 'aircrew_1', 'aircrew_2']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class DepartureUpdate(UpdateView):
+    model = Departure
+    fields = ['time', 'airport', 'pilot_1', 'pilot_2', 'aircrew_1', 'aircrew_2']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class DepartureDelete(DeleteView):
+    model = Departure
+    success_url = reverse_lazy('flight:departure-index')
+
+#---------Arrival---------
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class ArrivalDetailView(generic.DetailView):
+    model = Arrival
+    template_name = 'flight/arrival_detail.html'
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class ArrivalCreate(CreateView):
+    model = Arrival
+    fields = ['time', 'airport']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class ArrivalUpdate(UpdateView):
+    model = Arrival
+    fields = ['time', 'airport']
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class ArrivalDelete(DeleteView):
+    model = Arrival
+    success_url = reverse_lazy('flight:arrival-index')

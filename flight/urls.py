@@ -20,14 +20,14 @@ urlpatterns = [
     #/flight/<flight_id>/delete/
     url(r'^flight/(?P<pk>[0-9]+)/delete/$', views.FlightDelete.as_view(), name='flight-delete'),
 
-    #-------Flights-------
+    #-------Employees-------
     #/employees
     url(r'^employees/$', views.EmployeesIndexView.as_view(), name='employee-index'),
 
     #/employees/<employee_id>/
     url(r'^employee/(?P<pk>[0-9]+)/$', views.EmployeeDetailView.as_view(), name='employee-detail'),
 
-    #/flight/add
+    #/employee/add
     url(r'^employee/add/$', views.EmployeeCreate.as_view(), name='employee-add'),
 
     #/flight/<flight_id>/update/
@@ -57,6 +57,6 @@ urlpatterns = [
     url(r'^bookings/confirmed/$', views.booking_submitted, name='bookings-confirmed'),
 
     #-------Other-------
-    #/other/
-    url(r'^other/$', views.other_index, name='other-index')
+    #Other
+    url(r'^other/$', views.other_index, name='other-index'),
 ]
