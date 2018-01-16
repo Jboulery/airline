@@ -10,18 +10,12 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <form class="form-horizontal" role="search" method="get" action="#">
+                    <form class="form-horizontal" role="search" method="post" action="{% url 'flight:flight-search' %}">
                         {% csrf_token %}
                         <div class='form-group date'>
                             <label class="control-label col-sm-2">Departure</label>
                             <div class="col-sm-10">
-                                <input type="date" id="departuretimepicker">
-                            </div>
-                        </div>
-                        <div class='form-group date'>
-                            <label class="control-label col-sm-2">Arrival</label>
-                            <div class="col-sm-10">
-                                <input type="date" id="arrivaltimepicker">
+                                <input type="date" name="departuretime" id="departuretimepicker">
                             </div>
                         </div>
                         <div class="form-group">

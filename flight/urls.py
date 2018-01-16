@@ -20,6 +20,9 @@ urlpatterns = [
     #/flight/<flight_id>/delete/
     url(r'^flight/(?P<pk>[0-9]+)/delete/$', views.FlightDelete.as_view(), name='flight-delete'),
 
+    #/search/
+    url(r'^search/$', views.search_flights, name='flight-search'),
+
     #-------Employees-------
     #/employees
     url(r'^employees/$', views.EmployeesIndexView.as_view(), name='employee-index'),

@@ -26,16 +26,16 @@
 
                 </div>
             </div>
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="col-sm-12 active">
+                    <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Employee</a>
+                </li>
+            </ul>
         </div>
 
         <!-- Right Employees List -->
         <div class="col-sm-8 col-md-9">
 
-            <ul class="nav nav-pills" style="margin-bottom: 10px;">
-                <li role="presentation" class="col-sm-offset-10 col-sm-2 active">
-                    <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Employee</a>
-                </li>
-            </ul>
             {% if all_employees %}
             <div class="panel panel-default">
                 <div class="panel-body">

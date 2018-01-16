@@ -20,6 +20,23 @@ class IndexView(generic.ListView):
         return Flight.objects.all()
 
 
+def search_flights(request):
+    from datetime import datetime
+
+    if request.method == 'POST':
+        try:
+            departuretime = datetime.strptime(request.POST['departuretime'], '%Y-%m-%d')
+        except:
+            departuretime = datetime.now()
+        flight_name = request.POST['flight_name']
+
+        context = {
+
+        }
+
+        return render(request, 'flight/index.html', context)
+
+
 class DetailView(generic.DetailView):
     model = Flight
     template_name = 'flight/detail.html'
