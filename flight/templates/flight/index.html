@@ -37,18 +37,19 @@
 
                 </div>
             </div>
-        </div>
-
-        <!-- Right Flights List -->
-        <div class="col-sm-8 col-md-9">
 
             {% if user.is_authenticated %}
                 <ul class="nav nav-pills" style="margin-bottom: 10px;">
-                    <li role="presentation" class="col-sm-offset-10 col-sm-2 active">
+                    <li role="presentation" class="col-sm-12 active">
                         <a href="{% url 'flight:flight-add' %}"><span class="glyphicon glyphicon-plus"></span>&nbsp;New Flight</a>
                     </li>
                 </ul>
             {% endif %}
+
+        </div>
+
+        <!-- Right Flights List -->
+        <div class="col-sm-8 col-md-9">
 
             {% if all_flights %}
             <div class="panel panel-default">
