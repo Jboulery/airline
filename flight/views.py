@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.generic import View
@@ -159,11 +160,10 @@ def booking_confirmation(request):
 
         return render(request, 'flight/booking-confirmation.html', context)
 
-#----Other--------
+
 def booking_submitted(request):
     if request.method == 'POST':
         nb_of_passengers = int(request.POST['nb_of_passengers'])
-        print(nb_of_passengers)
         flight = Flight.objects.get(id = int(request.POST['flight_id']))
 
         confirmed_bookings_list = []
@@ -188,8 +188,9 @@ def booking_submitted(request):
         }
 
         return render(request, 'flight/booking-confirmed.html', context)
-#----Other--------
 
+
+#----Other--------
 def other_index(request):
     all_airports_list = Airport.objects.all()
     all_planes_list = Plane.objects.all()
