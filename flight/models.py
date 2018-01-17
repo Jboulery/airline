@@ -39,6 +39,9 @@ class Plane(models.Model):
     def __str__(self):
         return self.manufacturer + ' ' + self.aircraft_model + ' - ' + self.registration_number
 
+    def get_absolute_url(self):
+        return reverse('flight:other-index')
+
 
 class Airport(models.Model):
     # Regex Validator needed
@@ -49,6 +52,9 @@ class Airport(models.Model):
 
     def __str__(self):
         return self.name + ' (' + self.three_letters_code + ')'
+
+    def get_absolute_url(self):
+        return reverse('flight:other-index')
 
 
 class Departure(models.Model):
@@ -62,6 +68,9 @@ class Departure(models.Model):
     def __str__(self):
         return self.airport.name + ' - ' + str(self.time)
 
+    def get_absolute_url(self):
+        return reverse('flight:other-index')
+
 
 class Arrival(models.Model):
     time = models.DateTimeField()
@@ -69,6 +78,9 @@ class Arrival(models.Model):
 
     def __str__(self):
         return self.airport.name + ' - ' + str(self.time)
+
+    def get_absolute_url(self):
+        return reverse('flight:other-index')
 
 
 class Flight(models.Model):

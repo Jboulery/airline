@@ -17,21 +17,31 @@ class IndexView(generic.ListView):
     context_object_name = 'all_flights'
 
     def get_queryset(self):
-        return Flight.objects.all()
+        return Flight.objects.all().order_by('departure__time')
 
 
 def search_flights(request):
     from datetime import datetime
+    import pytz
+
+    utc = pytz.UTC
 
     if request.method == 'POST':
         try:
-            departuretime = datetime.strptime(request.POST['departuretime'], '%Y-%m-%d')
+            departuretime = datetime.strptime(request.POST['departuretime'], '%Y-%m-%d').replace(tzinfo=utc)
         except:
-            departuretime = datetime.now()
-        flight_name = request.POST['flight_name']
+            departuretime = datetime.now().replace(tzinfo=utc)
+        flight_nb = request.POST['flight_nb']
+
+        all_flights = Flight.objects.filter(flight_number__startswith=flight_nb).order_by('departure__time')
+        filtered_flights = []
+
+        for flight in all_flights:
+            if flight.departure.time >= departuretime:
+                filtered_flights.append(flight)
 
         context = {
-
+            'all_flights': filtered_flights,
         }
 
         return render(request, 'flight/index.html', context)
@@ -211,8 +221,8 @@ def booking_submitted(request):
 def other_index(request):
     all_airports_list = Airport.objects.all()
     all_planes_list = Plane.objects.all()
-    all_departures_list = Departure.objects.all()
-    all_arrivals_list = Arrival.objects.all()
+    all_departures_list = Departure.objects.all().order_by('time')
+    all_arrivals_list = Arrival.objects.all().order_by('time')
     context = {
         'all_airports': all_airports_list,
         'all_planes': all_planes_list,

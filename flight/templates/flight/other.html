@@ -6,8 +6,8 @@
 
     <!-- Left Plane List -->
     <div class="col-sm-6 col-md-6">
-
         {% if all_planes %}
+
         <div class="panel panel-default">
             <div class="panel-body">
                 <h3>Planes List</h3>
@@ -15,24 +15,25 @@
                 {% if error_message %}
                     <p><strong>{{error_message}}</strong></p>
                 {% endif %}
+
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Plaque d'immatriculation</th>
-                            <th>Fabricant</th>
-                            <th>Modèle</th>
-                            <th>Capacité col</th>
-                            <th>Capacité ligne</th>
+                            <th>Registration Number</th>
+                            <th>Manufacturer</th>
+                            <th>Model</th>
+                            <th>Nb of seats per row</th>
+                            <th>Nb of rows</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for plane in all_planes %}
                         <tr>
-                            <td>{{Plane.registration_number}}</td>
-                            <td>{{Plane.manufacturer}}</td>
-                            <td>{{Plane.aircraft_model}}</td>
-                            <td>{{Plane.nb_rows_of_seats}}</td>
-                            <td>{{Plane.nb_col_of_seats}}</td>
+                            <td>{{plane.registration_number}}</td>
+                            <td>{{plane.manufacturer}}</td>
+                            <td>{{plane.aircraft_model}}</td>
+                            <td>{{plane.nb_rows_of_seats}}</td>
+                            <td>{{plane.nb_col_of_seats}}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -61,19 +62,19 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Code 3 lettres</th>
-                            <th>Nom</th>
-                            <th>Ville</th>
-                            <th>Pays</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>City</th>
+                            <th>Country</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for airport in all_airports %}
                         <tr>
-                            <td>{{Airport.three_letters_code}}</td>
-                            <td>{{Airport.name}}</td>
-                            <td>{{Airport.city}}</td>
-                            <td>{{Airport.country}}</td>
+                            <td>{{airport.three_letters_code}}</td>
+                            <td>{{airport.name}}</td>
+                            <td>{{airport.city}}</td>
+                            <td>{{airport.country}}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -101,10 +102,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Heure</th>
-                            <th>Aéroport</th>
-                            <th>Pilote 1</th>
-                            <th>Pilote 2</th>
+                            <th>Time</th>
+                            <th>Airport</th>
+                            <th>Pilot 1</th>
+                            <th>Pilot 2</th>
                             <th>Staff 1</th>
                             <th>Staff 2</th>
                         </tr>
@@ -112,12 +113,12 @@
                     <tbody>
                     {% for departure in all_departures %}
                         <tr>
-                            <td>{{Departure.time}}</td>
-                            <td>{{Departure.airport}}</td>
-                            <td>{{Departure.pilot_1}}</td>
-                            <td>{{Departure.pilot_2}}</td>
-                            <td>{{Departure.aircrew_1}}</td>
-                            <td>{{Departure.aircrew_2}}</td>
+                            <td>{{departure.time}}</td>
+                            <td>{{departure.airport}}</td>
+                            <td>{{departure.pilot_1}}</td>
+                            <td>{{departure.pilot_2}}</td>
+                            <td>{{departure.aircrew_1}}</td>
+                            <td>{{departure.aircrew_2}}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -146,15 +147,15 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Heure</th>
-                            <th>Aéroport</th>
+                            <th>Time</th>
+                            <th>Airport</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for arrival in all_arrivals %}
                         <tr>
-                            <td>{{Arrival.time}}</td>
-                            <td>{{Arrival.airport}}</td>
+                            <td>{{arrival.time}}</td>
+                            <td>{{arrival.airport}}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
