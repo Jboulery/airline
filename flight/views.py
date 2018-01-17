@@ -77,7 +77,21 @@ class EmployeesIndexView(generic.ListView):
     context_object_name = 'all_employees'
 
     def get_queryset(self):
-        return Employee.objects.all()
+        return Employee.objects.all().order_by('lastname')
+
+def search_employees(request):
+
+    if request.method == 'POST':
+        employee_firstname = request.POST['employee_firstname']
+        employee_lastname = request.POST['employee_lastname']
+
+        all_employees = Employee.objects.filter(firstname__contains=employee_firstname).filter(lastname__contains=employee_lastname).order_by('lastname')
+
+        context = {
+            'all_employees': all_employees,
+        }
+
+        return render(request, 'flight/employees.html', context)
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')

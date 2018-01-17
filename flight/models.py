@@ -17,6 +17,9 @@ class Employee(Person):
     job = models.CharField(max_length=100)
     picture = models.FileField(default='anonymous.png')
 
+    def name(self):
+        return self.firstname + ' ' + self.lastname
+
     def get_absolute_url(self):
         return reverse('flight:employee-detail', kwargs={'pk': self.pk})
 

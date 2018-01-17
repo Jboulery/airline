@@ -27,6 +27,9 @@ urlpatterns = [
     #/employees
     url(r'^employees/$', views.EmployeesIndexView.as_view(), name='employee-index'),
 
+    #/employees/search
+    url(r'^employees/search/$', views.search_employees, name='employee-search'),
+
     #/employees/<employee_id>/
     url(r'^employee/(?P<pk>[0-9]+)/$', views.EmployeeDetailView.as_view(), name='employee-detail'),
 
