@@ -251,13 +251,13 @@ class PlaneDelete(DeleteView):
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class AirportCreate(CreateView):
     model = Airport
-    fields = [' three_letters_code', 'name', 'city', 'country']
+    fields = ['three_letters_code', 'name', 'city', 'country']
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class AirportUpdate(UpdateView):
     model = Airport
-    fields = [' three_letters_code', 'name', 'city', 'country']
+    fields = ['three_letters_code', 'name', 'city', 'country']
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')

@@ -62,4 +62,17 @@ urlpatterns = [
     #-------Other-------
     #Other
     url(r'^other/$', views.other_index, name='other-index'),
+
+    #/plane/add
+    url(r'^plane/add/$', views.PlaneCreate.as_view(), name='plane-add'),
+
+    #/airport/add
+    url(r'^airport/add/$', views.AirportCreate.as_view(), name='airport-add'),
+
+    # /Departure/add
+    url(r'^departure/add/$', views.DepartureCreate.as_view(), name='departure-add'),
+
+    # /Arrival/add
+    url(r'^arrival/add/$', views.ArrivalCreate.as_view(), name='arrival-add'),
+
 ]
