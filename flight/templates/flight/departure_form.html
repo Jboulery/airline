@@ -1,5 +1,5 @@
  {% extends 'flight/base.html' %}
- {% block title %}Add a New Plane{% endblock %}
+ {% block title %}Add a New Departure{% endblock %}
 
  {% block body %}
 
@@ -30,5 +30,11 @@
         </div>
 
     </div>
+    <script>
+        $('#id_time').datetimepicker({
+            format: 'Y-m-d H:i'
+        });
+    </script>
+
 
  {% endblock %}

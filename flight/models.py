@@ -8,6 +8,9 @@ class Person(models.Model):
     dob = models.DateField()
     address = models.CharField(max_length=500)
 
+    class Meta:
+        unique_together = ('firstname', 'lastname', 'dob')
+
     def __str__(self):
         return self.firstname + ' ' + self.lastname
 
@@ -29,11 +32,11 @@ class AirCrew(Employee):
 
 
 class Pilot(AirCrew):
-    license_number = models.CharField(max_length=100)
+    license_number = models.CharField(max_length=100, unique=True)
 
 
 class Plane(models.Model):
-    registration_number = models.CharField(max_length=20)
+    registration_number = models.CharField(max_length=20, unique=True)
     manufacturer = models.CharField(max_length=50)
     aircraft_model = models.CharField(max_length=50)
     nb_rows_of_seats = models.PositiveSmallIntegerField()
@@ -47,9 +50,8 @@ class Plane(models.Model):
 
 
 class Airport(models.Model):
-    # Regex Validator needed
     three_letters_code = models.CharField(max_length=3)
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
@@ -74,6 +76,12 @@ class Departure(models.Model):
     def get_absolute_url(self):
         return reverse('flight:other-index')
 
+    def save(self, *args, **kwargs):
+        if self.pilot_1 == self.pilot_2 or self.aircrew_1 == self.aircrew_2:
+            return reverse('flight:index')
+        else:
+            return super(Departure, self).save(*args, **kwargs)
+
 
 class Arrival(models.Model):
     time = models.DateTimeField()
@@ -87,7 +95,7 @@ class Arrival(models.Model):
 
 
 class Flight(models.Model):
-    flight_number = models.CharField(max_length=10)
+    flight_number = models.CharField(max_length=10, unique=True)
     plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
     departure = models.ForeignKey(Departure, on_delete=models.CASCADE)
     arrival = models.ForeignKey(Arrival, on_delete=models.CASCADE)
@@ -103,8 +111,7 @@ class Flight(models.Model):
 
 
 class Booking(models.Model):
-    from datetime import datetime
-    booking_number = models.CharField(max_length=50)
+    booking_number = models.CharField(max_length=50, unique=True)
     price = models.FloatField(default=100)
     flight = models.ForeignKey(Flight)
     created_at = models.DateTimeField(auto_now_add=True)
