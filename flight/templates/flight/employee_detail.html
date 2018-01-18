@@ -1,5 +1,5 @@
 {% extends 'flight/base.html' %}
-{% block title %}{{employee}}{% endblock %}
+{% block title %}{{employee}}'s Flights{% endblock %}
 {% block employee_index_active %}active{% endblock %}
 
 {% block body %}
@@ -9,13 +9,18 @@
         <!-- Left Flight Search -->
         <div class="col-sm-4 col-md-3">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body" style="text-align: center;">
                     <h4>Picture</h4>
                     <div>
                         <img src="{{ employee.picture.url }}" class="img-responsive"/>
                     </div>
                 </div>
             </div>
+            <form role="form" method="post" action="{% url 'flight:employee-flights' %}">
+                {% csrf_token %}
+                <input class="hidden" name="employee_id" value="{{employee.id}}"/>
+                <button class="btn btn-primary col-sm-12">{{employee}}'s Next Flights</button>
+            </form>
         </div>
 
         <!-- Right Details List -->

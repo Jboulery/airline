@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
 
 
@@ -73,6 +74,9 @@ class Departure(models.Model):
     def __str__(self):
         return self.airport.name + ' - ' + str(self.time)
 
+    def get_crew(self):
+        return [self.pilot_1, self.pilot_2, self.aircrew_1, self.aircrew_2]
+
     def get_absolute_url(self):
         return reverse('flight:other-index')
 
@@ -97,8 +101,8 @@ class Arrival(models.Model):
 class Flight(models.Model):
     flight_number = models.CharField(max_length=10, unique=True)
     plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
-    departure = models.ForeignKey(Departure, on_delete=models.CASCADE)
-    arrival = models.ForeignKey(Arrival, on_delete=models.CASCADE)
+    departure = models.OneToOneField(Departure, on_delete=models.CASCADE)
+    arrival = models.OneToOneField(Arrival, on_delete=models.CASCADE)
 
     def total_seats_nb(self):
         return self.plane.nb_col_of_seats * self.plane.nb_rows_of_seats - self.booking_set.count()

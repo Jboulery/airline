@@ -32,11 +32,13 @@
 
                 </div>
             </div>
-            <ul class="nav nav-pills" style="margin-bottom: 10px;">
-                <li role="presentation" class="col-sm-12 active">
-                    <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Employee</a>
-                </li>
-            </ul>
+            {% if user.is_staff %}
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                    <li role="presentation" class="col-sm-12 active">
+                        <a href="{% url 'flight:employee-add' %}"><span class="glyphicon glyphicon-plus"></span> New Employee</a>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
 
         <!-- Right Employees List -->
@@ -57,11 +59,12 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Address</th>
-                                <th>Email</th>
                                 <th>Birthday</th>
                                 <th>Job</th>
-                                <th>Current Monthly Salary</th>
-                                <th>Actions</th>
+                                {% if user.is_staff %}
+                                    <th>Current Monthly Salary</th>
+                                    <th>Actions</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -69,22 +72,23 @@
                             <tr>
                                 <td><a href="{% url 'flight:employee-detail' employee.id %}">{{employee}}</a></td>
                                 <td>{{employee.address}}</td>
-                                <td></td>
                                 <td>{{employee.dob}}</td>
                                 <td>{{employee.job}}</td>
+                                {% if user.is_staff %}
                                 <td>{{employee.salary}}€</td>
-                                <td>
-                                    <a class="btn btn-primary btn-sml" href="{% url 'flight:employee-update' employee.id %}">
-                                        <span class="glyphicon glyphicon-cog"></span>
-                                    </a>
-                                    <form action="{% url 'flight:employee-delete' employee.id %}" method="post" style="display: inline;">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="album_id" value="{{employee.id}}"/>
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </form>
-                                </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sml" href="{% url 'flight:employee-update' employee.id %}">
+                                            <span class="glyphicon glyphicon-cog"></span>
+                                        </a>
+                                        <form action="{% url 'flight:employee-delete' employee.id %}" method="post" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="album_id" value="{{employee.id}}"/>
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </form>
+                                    </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>

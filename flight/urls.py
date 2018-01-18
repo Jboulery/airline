@@ -36,11 +36,14 @@ urlpatterns = [
     #/employee/add
     url(r'^employee/add/$', views.EmployeeCreate.as_view(), name='employee-add'),
 
-    #/flight/<flight_id>/update/
+    #/employee/<employee_id>/update/
     url(r'^employee/(?P<pk>[0-9]+)/update/$', views.EmployeeUpdate.as_view(), name='employee-update'),
 
-    #/flight/<flight_id>/delete/
+    #/employee/<employee_id>/delete/
     url(r'^employee/(?P<pk>[0-9]+)/delete/$', views.EmployeeDelete.as_view(), name='employee-delete'),
+
+    #employee/<employee_id>/flights
+    url(r'^employee/flights/$', views.employee_flights, name='employee-flights'),
 
     #-------Users-------
     #/register/

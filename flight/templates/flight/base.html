@@ -59,11 +59,19 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated and user.is_staff %}
+                    <li>
+                        <a href="{% url 'flight:register' %}">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                            Add User
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="">
                     {% if user.is_authenticated %}
                         <a href="{% url 'flight:logout' %}">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
-                            Logout
+                            Logout ({{user}})
                         </a>
                     {% else %}
                         <a href="{% url 'flight:login' %}">

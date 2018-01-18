@@ -42,11 +42,13 @@
             </div>
         </div>
         {% endif %}
+        {% if user.is_staff %}
         <ul class="nav nav-pills" style="margin-bottom: 10px;">
             <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
                 <a href="{% url 'flight:plane-add' %}"><span class="glyphicon glyphicon-plus"></span> New Plane</a>
             </li>
         </ul>
+        {% endif %}
     </div>
 
     <!-- Right Airport List -->
@@ -82,11 +84,13 @@
             </div>
         </div>
         {% endif %}
-        <ul class="nav nav-pills" style="margin-bottom: 10px;">
-            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
-                <a href="{% url 'flight:airport-add' %}"><span class="glyphicon glyphicon-plus"></span> New Airport</a>
-            </li>
-        </ul>
+        {% if user.is_staff %}
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                    <a href="{% url 'flight:airport-add' %}"><span class="glyphicon glyphicon-plus"></span> New Airport</a>
+                </li>
+            </ul>
+        {% endif %}
     </div>
 
     <!-- Left Departures List -->
@@ -127,11 +131,13 @@
             </div>
         </div>
         {% endif %}
-        <ul class="nav nav-pills" style="margin-bottom: 10px;">
-            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
-                <a href="{% url 'flight:departure-add' %}"><span class="glyphicon glyphicon-plus"></span> New Departure</a>
-            </li>
-        </ul>
+        {% if user.is_staff %}
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                    <a href="{% url 'flight:departure-add' %}"><span class="glyphicon glyphicon-plus"></span> New Departure</a>
+                </li>
+            </ul>
+        {% endif %}
     </div>
 
     <!-- Right Arrivals List -->
@@ -163,11 +169,13 @@
             </div>
         </div>
         {% endif %}
-        <ul class="nav nav-pills" style="margin-bottom: 10px;">
-            <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
-                <a href="{% url 'flight:arrival-add' %}"><span class="glyphicon glyphicon-plus"></span> New Arrival</a>
-            </li>
-        </ul>
+        {% if user.is_staff %}
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="col-sm-offset-6 col-sm-6 active">
+                    <a href="{% url 'flight:arrival-add' %}"><span class="glyphicon glyphicon-plus"></span> New Arrival</a>
+                </li>
+            </ul>
+        {% endif %}
     </div>
 
 {% endblock %}
