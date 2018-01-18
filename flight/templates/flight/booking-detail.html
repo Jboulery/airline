@@ -1,0 +1,65 @@
+{% extends 'flight/base.html' %}
+{% block title %}My Booking{% endblock %}
+{% block bookings_active %}active{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid flights-container">
+
+        <!-- Left Flight Search -->
+        <div class="col-sm-6 col-md-4">
+            <div class="panel panel-default">
+                <h3>Passenger</h3>
+                <table class="table" id="passengerDetailsTable">
+                    <tbody>
+                        <tr>
+                            <th class="col-sm-3">Name</th>
+                            <td class="col-sm-9">{{booking.customer_set.first.firstname}} {{booking.customer_set.first.lastname}}</td>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-3">Birthday</th>
+                            <td class="col-sm-9">{{booking.customer_set.first.dob}}</td>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-3">Address</th>
+                            <td class="col-sm-9">{{booking.customer_set.first.address}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Right Details List -->
+        <div class="col-sm-6 col-md-8">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>My Flight</h3>
+                    <table class="table" id="generalDetailsTable">
+                        <tbody>
+                            <tr>
+                                <th class="col-sm-3">Departure Airport</th>
+                                <td class="col-sm-9">{{booking.flight.departure.airport}}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-3">Departure Time</th>
+                                <td class="col-sm-9">{{booking.flight.departure.time}}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-3">Arrival Airport</th>
+                                <td class="col-sm-9">{{booking.flight.arrival.airport}}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-3">Expected Arrival Time</th>
+                                <td class="col-sm-9">{{booking.flight.arrival.time}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
