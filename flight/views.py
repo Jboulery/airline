@@ -213,6 +213,17 @@ class BookingsView(generic.ListView):
         return Booking.objects.all()
 
 
+def get_booking(request):
+    if request.method == 'POST':
+        booking_nb = request.POST['booking_nb']
+
+        booking = Booking.objects.filter(booking_number=booking_nb).first()
+
+        context = {'booking': booking}
+
+    return render(request, 'flight/booking-detail.html', context)
+
+
 def booking_confirmation(request):
     if request.method == 'POST':
         nb_of_passengers = int(request.POST['nb_of_passengers'])
