@@ -207,6 +207,12 @@ def booking_submitted(request):
         nb_of_passengers = int(request.POST['nb_of_passengers'])
         flight = Flight.objects.get(id = int(request.POST['flight_id']))
 
+        if flight.total_seats_nb() < nb_of_passengers:
+            context = {
+                'error_message': 'Not enough seats, your booking can not be completed !',
+            }
+            return render(request, 'flight/index.html', context)
+
         confirmed_bookings_list = []
 
         for i in range(1, nb_of_passengers + 1):

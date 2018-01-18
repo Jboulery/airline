@@ -45,15 +45,16 @@
         <!-- Right Flights List -->
         <div class="col-sm-8 col-md-9">
 
-            {% if all_flights %}
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <h3>Flights List</h3>
-
                     {% if error_message %}
-                        <p><strong>{{error_message}}</strong></p>
+                        <p class="text-danger" style="text-align: center;"><strong>{{error_message}}</strong></p>
                     {% endif %}
+
+                    {% if all_flights %}
+
+                    <h3>Flights List</h3>
 
                     <table class="table">
                         <thead>
@@ -79,10 +80,9 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
+                    {% endif %}
                 </div>
             </div>
-            {% endif %}
         </div>
 
     </div>
